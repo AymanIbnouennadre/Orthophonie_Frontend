@@ -22,4 +22,24 @@
   .carousel-image.loaded {
     opacity: 1;
   }
+  @media (max-width: 768px) {
+  .header-carousel img {
+    height: 50vh !important; /* Réduit la hauteur sur mobile */
+  }
   
+  .header-carousel .container {
+    text-align: center !important; /* Centre le texte */
+  }
+
+  .header-carousel .row {
+    margin: 0 !important; /* Supprime les marges négatives */
+  }
+
+  .header-carousel h1 {
+    font-size: 1.8rem !important; /* Réduit la taille du titre */
+  }
+
+  .header-carousel p {
+    font-size: 1rem !important; /* Ajuste la taille du texte */
+  }
+}

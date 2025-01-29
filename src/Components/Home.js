@@ -7,8 +7,7 @@ import '../assets/lib/animate/animate.css';
 //import '../assets/scss/bootstrap'
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import carousel1 from '../assets/img/Background.jpg';
-import Spinner from './Spinner';
+import carousel1 from '../assets/img/Background.webp';
 import Started from '../assets/img/appointment.jpg';
 import user from '../assets/img/user.jpg';
 import about1 from '../assets/img/about-1.jpg';
@@ -21,13 +20,14 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     // Simuler un temps de chargement
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 300);
-
+    }, 100);
+   
     return () => clearTimeout(timer);
   }, []);
 
@@ -48,8 +48,14 @@ const Home = () => {
       window.removeEventListener('scroll', handleScroll); // Nettoyage de l'événement
     };
   }, []);
-
-  if (loading) {
+  useEffect(() => {
+    const img = new Image();
+    img.src = carousel1;
+    img.onload = () => {
+      setImageLoaded(true); // Marque l'image comme chargée
+    };
+  }, []);
+  if (!imageLoaded) {
     return (
       <div className="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div className="spinner-border text-primary" style={{ width: '3rem', height: '3rem' }} role="status">
@@ -59,62 +65,67 @@ const Home = () => {
     );
   }
 
+ 
+
   return (
 
     <div className="container-fluid bg-white p-0">
 
       
-      {/* Carousel Start */}
-      <div className="container-fluid p-0 mb-5">
-        <div className="owl-carousel header-carousel position-relative">
-          <div className="owl-carousel-item position-relative">
-            <img
-              className="img-fluid"
-              src={carousel1}
-              alt="Carousel"
-              style={{
-                width: '100%',
-                height: '100vh', // S'étendre à la hauteur de la fenêtre
-                objectFit: 'cover', // Ajustement propre pour éviter le zoom excessif
-              }}
-            />
-            <div
-              className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
-              style={{ background: 'rgba(0, 0, 0, .2)' }}
-            >
-              <div className="container">
-                <div
-                  className="row justify-content-start"
-                  style={{ marginTop: '-180px', marginLeft: '-50px' }}
-                >
-                  <div className="col-10 col-lg-8">
-                    <h1 className="display-2 text-white animated slideInDown mb-4">
-                    Redonner confiance à chaque enfant, un mot à la fois
-                    </h1>
-                    <p className="fs-5 fw-medium text-white mb-4 pb-2">
-                      Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no.
-                      Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.
-                    </p>
-                    <a
-                      href="/functionalities"
-                      className="btn btn-primary rounded-pill py-sm-3 px-sm-5 me-3 animated slideInLeft"
-                    >
-                      Commencer
-                    </a>
-                    <a
-                      href="/A_propos_de_nous"
-                      className="btn btn-dark rounded-pill py-sm-3 px-sm-5 animated slideInRight"
-                    >
-                      Savoir plus
-                    </a>
-                  </div>
-                </div>
-              </div>
+     {/* Carousel Start */}
+<div className="container-fluid p-0 mb-5">
+  <div className="owl-carousel header-carousel position-relative">
+    <div className="owl-carousel-item position-relative">
+      <img
+        className="img-fluid"
+        src={carousel1}
+        alt="Carousel"
+        style={{
+          width: '100%',
+          height: '100vh',
+          objectFit: 'cover',
+          display: 'block',
+          position: 'relative',
+          zIndex: 0, // Empêche l’image de dépasser la section suivante
+        }}
+      />
+      <div
+        className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+        style={{ background: 'rgba(0, 0, 0, .2)' }}
+      >
+        <div className="container">
+          <div
+            className="row justify-content-start"
+            style={{ marginTop: '-180px', marginLeft: '-30px' }}
+          >
+            <div className="col-10 col-lg-8">
+              <h1 className="display-2 text-white animated slideInDown mb-4">
+                Redonner confiance à chaque enfant, un mot à la fois.
+              </h1>
+              <p className="fs-5 fw-medium text-white mb-4 pb-2">
+                Une plateforme conçue pour transformer les défis en réussites, et permettre à chaque enfant de grandir avec confiance et autonomie.
+              </p>
+              <a
+                href="/functionalities"
+                className="btn btn-primary rounded-pill py-sm-3 px-sm-5 me-3 animated slideInLeft"
+              >
+                Commencer
+              </a>
+              <a
+                href="/A_propos_de_nous"
+                className="btn btn-dark rounded-pill py-sm-3 px-sm-5 animated slideInRight"
+              >
+                Savoir plus
+              </a>
             </div>
           </div>
         </div>
       </div>
-      {/* Carousel End */}
+    </div>
+  </div>
+</div>
+{/* Carousel End */}
+
       {/* Facilities Start */}
 <div className="container-xxl py-5">
   <div className="container">
@@ -184,16 +195,15 @@ const Home = () => {
         <div className="container">
           <div className="row g-5 align-items-center">
             <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-              <h1 className="mb-4">Learn More About Our Work And Our Cultural Activities</h1>
-              <p>Je m'appelle Chaimae Barakat, orthophoniste passionnée par l'innovation et dotée d'un esprit créatif qui me pousse à repousser les limites des méthodes traditionnelles. Forte de plusieurs années d'expérience dans la prise en charge des troubles d'apprentissage, j'ai constaté le besoin urgent d'outils éducatifs modernes et adaptés pour les enfants dyslexiques et bilingues au Maroc. </p>
-              <p className="mb-4">C'est ainsi que j'ai imaginé et développé cette application, la première du genre dans notre pays, conçue pour répondre spécifiquement aux besoins des enfants arabophones et francophones. Mon ambition est de transformer chaque défi en opportunité et de permettre à chaque enfant d'apprendre autrement, avec confiance et épanouissement.</p>
+              <h1 className="mb-4">Barakat : La première application marocaine dédiée aux enfants dyslexiques</h1>
+              <p>Cette application web, première du genre au Maroc, est spécialement conçue pour accompagner les enfants dyslexiques et bilingues dans leur apprentissage. Grâce à des outils interactifs et des exercices adaptés, elle aide à renforcer la lecture, l’écriture et la confiance en soi. Développée avec une approche pédagogique moderne, elle offre une expérience d’apprentissage engageante et accessible, répondant aux besoins spécifiques de chaque enfant. Notre mission est de rendre l’apprentissage plus inclusif, motivant et adapté aux défis des jeunes apprenants d’aujourd’hui.</p>
               <div className="row g-4 align-items-center">
                 {/*<div className="col-sm-6">
                   <a className="btn btn-primary rounded-pill py-3 px-5" href>Read More</a>
                 </div>*/}
                 <div className="col-sm-6">
                   <div className="d-flex align-items-center">
-                    <img className="rounded-circle flex-shrink-0" src={user} alt style={{ width: 45, height: 45 }} />
+                    {/*<img className="rounded-circle flex-shrink-0" src={user} alt style={{ width: 45, height: 45 }} />*/}
                     <div className="ms-3">
                       <h6 className="text-primary mb-1">Chaima Barakat</h6>
                       <small>Orthophoniste</small>
@@ -231,9 +241,8 @@ const Home = () => {
               </div>
               <div className="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                 <div className="h-100 d-flex flex-column justify-content-center p-5">
-                  <h1 className="mb-4">Become A Teacher</h1>
-                  <p className="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos.
-                    Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet
+                  <h1 className="mb-4">Apprenez, inspirez et accompagnez les enfants vers la réussite !</h1>
+                  <p className="mb-4">Devenez un acteur clé dans le développement des enfants dyslexiques. Découvrez des outils et des exercices spécialement conçus pour améliorer leurs compétences en lecture, en écriture et en compréhension, tout en favorisant leur épanouissement. Ensemble, construisons un avenir meilleur pour chaque enfant.
                   </p>
                   <a className="btn btn-primary py-3 px-5" href="/functionalities">Profiter Maintenant ! <i className="fa fa-arrow-right ms-2" /></a>
                 </div>
