@@ -106,13 +106,13 @@ const Home = () => {
                 Une plateforme conçue pour transformer les défis en réussites, et permettre à chaque enfant de grandir avec confiance et autonomie.
               </p>
               <a
-                href="/functionalities"
+                href="/fonctionnalités"
                 className="btn btn-primary rounded-pill py-sm-3 px-sm-5 me-3 animated slideInLeft"
               >
                 Commencer
               </a>
               <a
-                href="/A_propos_de_nous"
+                href="/À_propos"
                 className="btn btn-dark rounded-pill py-sm-3 px-sm-5 animated slideInRight"
               >
                 Savoir plus
@@ -244,7 +244,7 @@ const Home = () => {
                   <h1 className="mb-4">Apprenez, inspirez et accompagnez les enfants vers la réussite !</h1>
                   <p className="mb-4">Devenez un acteur clé dans le développement des enfants dyslexiques. Découvrez des outils et des exercices spécialement conçus pour améliorer leurs compétences en lecture, en écriture et en compréhension, tout en favorisant leur épanouissement. Ensemble, construisons un avenir meilleur pour chaque enfant.
                   </p>
-                  <a className="btn btn-primary py-3 px-5" href="/functionalities">Profiter Maintenant ! <i className="fa fa-arrow-right ms-2" /></a>
+                  <a className="btn btn-primary py-3 px-5" href="/fonctionnalités">Profiter Maintenant ! <i className="fa fa-arrow-right ms-2" /></a>
                 </div>
               </div>
             </div>

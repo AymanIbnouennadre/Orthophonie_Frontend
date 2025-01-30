@@ -16,8 +16,8 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/functionalities" element={<Functionalities />} />
-            <Route path="/A_propos_de_nous" element={<About />} />
+            <Route path="/fonctionnalités" element={<Functionalities />} />
+            <Route path="/À_propos" element={<About />} />
             <Route path="/image-to-text" element={<ImageToText />} />
           </Routes>
           <Footer />

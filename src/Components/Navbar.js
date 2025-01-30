@@ -12,7 +12,7 @@ const Navbar = () => {
 
   const handleFunctionalityClick = (e) => {
     e.preventDefault();
-    navigate('/functionalities');
+    navigate('/fonctionnalités');
   };
 
   // Fermer la navbar quand on clique en dehors
@@ -58,8 +58,8 @@ const Navbar = () => {
             <Link to="/" className={`nav-item nav-link ${location.pathname === '/' ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>
               Accueil
             </Link>
-            <Link to="/A_propos_de_nous" className={`nav-item nav-link ${location.pathname === '/A_propos_de_nous' ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>
-              À propos de nous
+            <Link to="/À_propos" className={`nav-item nav-link ${location.pathname === '/A_propos_de_nous' ? 'active' : ''}`} onClick={() => setIsMenuOpen(false)}>
+              À propos 
             </Link>
 
             {/* Dropdown Fonctionnalités */}
@@ -70,7 +70,7 @@ const Navbar = () => {
             >
               <a
                 href="/functionalities"
-                className={`nav-link dropdown-toggle ${location.pathname.startsWith('/functionalities') ||
+                className={`nav-link dropdown-toggle ${location.pathname.startsWith('/fonctionnalités') ||
                   location.pathname === '/image-to-text' ||
                   location.pathname === '/quiz' ||
                   location.pathname === '/speech-to-text'
