@@ -18,7 +18,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/fonctionnalités" element={<Functionalities />} />
             <Route path="/À_propos" element={<About />} />
-            <Route path="/image-to-text" element={<ImageToText />} />
+            <Route path="/fonctionnalités/image-to-text" element={<ImageToText />} />
           </Routes>
           <Footer />
         </Spinner>

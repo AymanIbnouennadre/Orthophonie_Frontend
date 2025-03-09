@@ -38,7 +38,7 @@ const Fonctionnalites = () => {
                         </div>
                         <div className="text-center mt-3">
                             <a
-                                href="/image-to-text"
+                                href="/fonctionnalités/image-to-text"
                                 className="btn btn-primary btn-sm rounded-pill px-4"
                             >
                                 Explorer
@@ -67,7 +67,7 @@ const Fonctionnalites = () => {
                         </div>
                         <div className="text-center mt-3">
                             <a
-                                href="/quiz"
+                                href="/fonctionnalités/quiz"
                                 className="btn btn-success btn-sm rounded-pill px-4"
                             >
                                 Participer
@@ -95,7 +95,7 @@ const Fonctionnalites = () => {
                         </div>
                         <div className="text-center mt-3">
                             <a
-                                href="/speech-to-text"
+                                href="/fonctionnalités/speech-to-text"
                                 className="btn btn-info btn-sm rounded-pill px-4"
                             >
                                 Découvrir

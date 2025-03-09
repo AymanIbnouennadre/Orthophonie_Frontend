@@ -49,4 +49,179 @@
   object-fit: cover; /* Garde une belle mise en page */
   border-radius: 8px; /* Coins arrondis */
 }
+@font-face {
+  font-family: "Reem Kufi";
+  src: url("https://fonts.gstatic.com/s/reemkufi/v6/0JshCkzKhVdbd5oG0tv8jYyM4F8X6Jr9fcS5FA8wkvQbgrPl2m8k3H2JBO1xX3kD.ttf");
+  font-display: swap;
+}
+.full-screen {
+  min-height: 100vh; /* Assure que la div blanche occupe toute la hauteur de l'écran */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centre verticalement */
+  align-items: center;
+  text-align: center;
+  padding: 50px 0; /* Ajoute un peu d'espace en haut et en bas */
+}
+.btn-start {
+  background-color: #ff6b6b !important; /* Rouge doux */
+  border-color: #ff6b6b !important;
+  color: white !important;
+  font-size: 1.5rem;
+  padding: 12px 24px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: none;
+  outline: none;
+}
 
+.btn-start:hover {
+  background-color: #e63946 !important; /* Rouge plus foncé au hover */
+  border-color: #e63946 !important;
+}
+.btn-back:hover {
+  background-color: #e63946 !important; /* Rouge plus foncé */
+  border-color: #e63946 !important;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+}
+/* 🇫🇷 Style du bouton Français */
+.btn-outline-primary {
+  background-color: #0055A4 !important; /* Bleu du drapeau français */
+  color: white !important; /* Texte blanc */
+  border-color: #0055A4 !important; /* Bordure bleue */
+}
+
+.btn-outline-primary:hover {
+  background-color: transparent !important; /* Fond transparent au hover */
+  color: #0055A4 !important; /* Texte bleu */
+  border-color: #0055A4 !important; /* Bordure bleue */
+}
+
+/* 🇸🇦 Style du bouton Arabe */
+.btn-outline-success {
+  background-color: #007A3D !important; /* Vert du drapeau saoudien */
+  color: white !important; /* Texte blanc */
+  border-color: #007A3D !important; /* Bordure verte */
+}
+
+.btn-outline-success:hover {
+  background-color: transparent !important; /* Fond transparent au hover */
+  color: #007A3D !important; /* Texte vert */
+  border-color: #007A3D !important; /* Bordure verte */
+}
+/* 🎠 Appliquer les styles UNIQUEMENT à la div avec .image-to-text-container */
+.image-to-text-container {
+  background: linear-gradient(120deg, #FFDEE9, #B5FFFC); /* Dégradé rose pastel -> bleu ciel */
+  font-family: "Comic Sans MS", "Poppins", sans-serif; /* Police ludique et douce */
+
+  padding: 20px;
+  animation: floating 3s ease-in-out infinite;
+}
+
+/* 🏠 Conteneur principal */
+.image-to-text-container .container {
+    background-color: rgba(255, 255, 255, 0.95); /* Fond blanc léger */
+    border-radius: 20px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px; /* Ajout d'un peu d'espace */
+    max-width: 85%; /* Garde la même largeur */
+    width: 100%;
+    height: 80vh; /* Augmente la hauteur */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+/* 🌈 Titres colorés et ludiques */
+.image-to-text-container h1 {
+  font-weight: bold;
+  color: #FF6B6B; /* Rouge enfantin */
+  text-shadow: 2px 2px 5px rgba(255, 100, 100, 0.5);
+}
+
+.image-to-text-container h5 {
+  color: #555;
+  font-style: italic;
+}
+
+/* 🎈 Boutons avec un effet "Jouet" */
+.image-to-text-container .btn-lg {
+  border-radius: 30px !important;
+  font-size: 1.3rem;
+  padding: 12px 25px;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+}
+
+/* 🟦 Français */
+.image-to-text-container .btn-outline-primary {
+  background-color: #0055A4 !important;
+  color: white !important;
+  border: 3px solid #0055A4 !important;
+}
+
+.image-to-text-container .btn-outline-primary:hover {
+  background-color: white !important;
+  color: #0055A4 !important;
+}
+
+/* 🟢 Arabe */
+.image-to-text-container .btn-outline-success {
+  background-color: #007A3D !important;
+  color: white !important;
+  border: 3px solid #007A3D !important;
+}
+
+.image-to-text-container .btn-outline-success:hover {
+  background-color: white !important;
+  color: #007A3D !important;
+}
+
+/* ✨ Animation douce */
+@keyframes floating {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+.btn-custom {
+  width: 100%; /* 100% sur mobile */
+  max-width: 200px; /* Taille max sur PC */
+  text-align: center;
+}
+
+/* 💻 Ajustement pour écrans plus larges */
+@media (min-width: 768px) {
+  .btn-custom {
+      width: auto; /* Taille auto pour éviter qu'ils soient trop grands */
+      padding: 12px 30px;
+  }
+}
+
+
+
+
+
+
+
+
+  
