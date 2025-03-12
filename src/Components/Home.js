@@ -137,7 +137,7 @@ const Home = () => {
                   <span className="bg-primary"></span>
                 </div>
                 <div className="facility-text bg-primary">
-                  <h3 className="text-primary mb-3">Image to Text</h3>
+                  <h3 className="text-primary mb-3">GraphoScan</h3>
                   <p className="mb-0">Convertissez vos images en texte avec précision grâce à notre outil OCR avancé.</p>
                 </div>
               </div>
@@ -154,7 +154,7 @@ const Home = () => {
                   <span className="bg-success"></span>
                 </div>
                 <div className="facility-text bg-success">
-                  <h3 className="text-success mb-3">Quiz</h3>
+                  <h3 className="text-success mb-3">PhonoSens</h3>
                   <p className="mb-0">Testez vos connaissances grâce à des quiz éducatifs et amusants.</p>
                 </div>
               </div>
@@ -171,7 +171,7 @@ const Home = () => {
                   <span className="bg-info"></span>
                 </div>
                 <div className="facility-text bg-info">
-                  <h3 className="text-info mb-3">Speech to Text</h3>
+                  <h3 className="text-info mb-3">PhonoTrack</h3>
                   <p className="mb-0">Améliorez votre prononciation avec notre outil de reconnaissance vocale.</p>
                 </div>
               </div>

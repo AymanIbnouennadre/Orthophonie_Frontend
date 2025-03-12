@@ -216,6 +216,31 @@
       padding: 12px 30px;
   }
 }
+/* Add this to your style.css */
+.text-container {
+  word-wrap: break-word;
+  overflow: hidden;
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+  margin: 0;
+  padding: 15px;
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .text-container {
+    font-size: 1.4rem;  /* Smaller text size on mobile */
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-container {
+    font-size: 1.2rem; /* Further reduction for very small screens */
+  }
+}
 
 
 
