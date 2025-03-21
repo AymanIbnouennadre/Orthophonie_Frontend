@@ -118,8 +118,8 @@ const Footer = () => {
           <div className="row">
             <div className="col-md-12 text-center">
               © <a className="border-bottom" href="/">Barakat بركات</a>, Tous droits réservés. |
-              Développé par : <a className="border-bottom" href="https://aymanibnouennadre.github.io/Portfolio/" target="_blank">Ayman Ibnouennadre</a> |
-              Conçu par <a className="border-bottom" href="https://htmlcodex.com" target="_blank">HTML Codex</a>
+              Développé par  <a className="border-bottom" href="https://aymanibnouennadre.github.io/Portfolio/" target="_blank">Ayman Ibnouennadre</a> |
+              Conçu par  <a className="border-bottom" href="https://htmlcodex.com" target="_blank">HTML Codex</a>
             </div>
           </div>
         </div>

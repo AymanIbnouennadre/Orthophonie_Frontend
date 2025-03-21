@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Spinner from './Components/Spinner';
 import About from './Components/About';
 import ImageToText from './Components/ImageToText';
+import SpeechToText from './Components/SpeechToText';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/fonctionnalités" element={<Functionalities />} />
             <Route path="/À_propos" element={<About />} />
             <Route path="/fonctionnalités/image-to-text" element={<ImageToText />} />
+            <Route path="/fonctionnalités/speech-to-text" element={<SpeechToText />} />
           </Routes>
           <Footer />
         </Spinner>

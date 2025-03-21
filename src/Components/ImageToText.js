@@ -593,9 +593,9 @@ const Fonctionnalites = () => {
           onRequestClose={clauseCameraModal}
           style={{
             content: {
-              width: "90vw",
-              maxWidth: "500px",
-              height: "70vh",
+              width: "100vw",
+              maxWidth: "700px",
+              height: "80vh",
               margin: "auto",
               top: "10vh",
               borderRadius: "20px",
@@ -617,7 +617,7 @@ const Fonctionnalites = () => {
             ref={webcamRef}
             screenshotFormat="image/png"
             className="img-fluid rounded shadow"
-            style={{ width: "100%", height: "70%", borderRadius: "10px" }}
+            style={{ width: "100%", height: "80%", borderRadius: "10px" }}
             videoConstraints={videoConstraints}
           />
           <button className="btn btn-success mt-3 me-2" onClick={handleCaptureImage}>
