@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useNavigate, useLocation } from 'react-router-dom'; // Ajout de useLocation
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import '../assets/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Navbar = () => {
-  const navigate = useNavigate(); // Initialiser navigate avec useNavigate
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navbarRef = useRef(null);
-
-  const currentLocation = useLocation(); // Renommage de location en currentLocation pour éviter le conflit
+  const currentLocation = useLocation();
 
   const handleFunctionalityClick = (e) => {
     e.preventDefault();
-    navigate('/fonctionnalités'); // Utilisation de navigate pour rediriger
+    navigate('/fonctionnalités');
   };
 
   // Fermer la navbar quand on clique en dehors
@@ -32,6 +31,20 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0" ref={navbarRef}>
+      <style>
+        {`
+          /* Apply Poppins font only to NavLink items */
+          .nav-link, .dropdown-item {
+            font-family: 'Poppins', sans-serif;
+          }
+
+          /* Apply Reem Kufi to Arabic logo */
+          .arabic-logo {
+            font-family: 'Reem Kufi', sans-serif;
+            direction: rtl;
+          }
+        `}
+      </style>
       <div className="container-fluid">
         {/* Logo Barakat en français */}
         <NavLink to="/" className="navbar-brand d-flex align-items-center">
@@ -126,9 +139,10 @@ const Navbar = () => {
 
           {/* Logo بركات en arabe aligné correctement */}
           <NavLink to="/" className="navbar-brand d-flex align-items-center ms-lg-3">
-            <h1 className="m-0 text-primary" style={{ fontFamily: "'Reem Kufi', sans-serif", whiteSpace: 'nowrap' }}>
+            <h1 className="m-0 text-primary arabic-logo">
+            <i className="fa fa-book-reader" />
               <span className="me-2">بركات</span>
-              <i className="fa fa-book-reader" />
+              
             </h1>
           </NavLink>
         </div>

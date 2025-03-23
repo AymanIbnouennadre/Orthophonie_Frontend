@@ -1,14 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import Webcam from "react-webcam";
 import Modal from "react-modal";
-import "../assets/css/bootstrap.min.css";
-import "../assets/lib/animate/animate.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
+import "../App.css";
 
-// Charger la police Tajawal depuis Google Fonts
 const loadGoogleFonts = () => {
   const link = document.createElement("link");
-  link.href = "https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap";
+  link.href = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Tajawal:wght@400;500;700&display=swap";
   link.rel = "stylesheet";
   document.head.appendChild(link);
 };
@@ -280,6 +277,43 @@ const Fonctionnalites = () => {
     <div>
       <style>
         {`
+          /* Apply Poppins font to French text and Tajawal to Arabic text after language selection */
+          .image-to-text-content {
+            font-family: 'Poppins', sans-serif; /* Default to Poppins for French */
+          }
+
+          .image-to-text-content.arabic {
+            font-family: 'Tajawal', sans-serif; /* Tajawal for Arabic */
+            direction: rtl;
+          }
+
+          /* Specific styles for buttons and text */
+          .image-to-text-content .btn {
+            font-family: inherit; /* Inherit the font from the parent */
+          }
+
+          .image-to-text-content h4, 
+          .image-to-text-content h5, 
+          .image-to-text-content p {
+            font-family: inherit; /* Inherit the font from the parent */
+          }
+
+          /* Modal styles */
+          .modal-content {
+            font-family: 'Poppins', sans-serif; /* Default to Poppins for French */
+          }
+
+          .modal-content.arabic {
+            font-family: 'Tajawal', sans-serif; /* Tajawal for Arabic */
+            direction: rtl;
+          }
+
+          .modal-content h2, 
+          .modal-content button {
+            font-family: inherit; /* Inherit the font from the parent */
+          }
+
+          /* Media queries remain unchanged */
           @media (max-width: 768px) {
             .text-muted {
               font-size: 1.2rem !important;
@@ -330,7 +364,7 @@ const Fonctionnalites = () => {
           }}
         >
           {language ? (
-            <>
+            <div className={`image-to-text-content ${language === "AR" ? "arabic" : ""}`}>
               <div className="text-center mb-3 mb-md-4">
                 <button
                   className="btn btn-outline-secondary btn-lg"
@@ -500,6 +534,13 @@ const Fonctionnalites = () => {
                   <p className="text-muted mb-3">{selectedFile?.name}</p>
                   <div className="d-flex justify-content-center gap-3">
                     <button
+                      className="btn btn-primary"
+                      onClick={handleStartClick}
+                      style={{ fontSize: "1rem", padding: "8px 20px" }}
+                    >
+                      {language === "FR" ? "Convertir" : "تحويل"}
+                    </button>
+                    <button
                       className="btn btn-warning"
                       onClick={() => {
                         setSelectedFile(null);
@@ -509,13 +550,6 @@ const Fonctionnalites = () => {
                     >
                       <i className="bi bi-x-circle"></i>{" "}
                       {language === "FR" ? "Annuler" : "إلغاء"}
-                    </button>
-                    <button
-                      className="btn btn-primary"
-                      onClick={handleStartClick}
-                      style={{ fontSize: "1rem", padding: "8px 20px" }}
-                    >
-                      {language === "FR" ? "Convertir" : "تحويل"}
                     </button>
                   </div>
                 </div>
@@ -542,8 +576,8 @@ const Fonctionnalites = () => {
                     <p
                       className="text-muted"
                       style={{
-                        fontSize: language === "AR" ? "clamp(1.35rem, 2.75vw, 1.8rem)" : "clamp(1.2rem, 2.5vw, 1.6rem)", // Augmenté pour l'arabe
-                        fontFamily: language === "AR" ? "'Tajawal', sans-serif" : "inherit", // Changé à Tajawal pour l'arabe
+                        fontSize: language === "AR" ? "clamp(1.35rem, 2.75vw, 1.8rem)" : "clamp(1.2rem, 2.5vw, 1.6rem)",
+                        fontFamily: language === "AR" ? "'Tajawal', sans-serif" : "'Poppins', sans-serif",
                         direction: language === "AR" ? "rtl" : "ltr",
                         lineHeight: "2",
                         whiteSpace: "normal",
@@ -560,27 +594,62 @@ const Fonctionnalites = () => {
                   </div>
                 </div>
               )}
-            </>
+            </div>
           ) : (
-            <div className="text-center">
-              <h1 className="mb-4">
-                🖼️ Reconnaissance d’Images et de Textes | محول الصورة إلى نص
+            <div className="text-center language-selection">
+              <h1
+                className="mb-4"
+                style={{
+                  color: "#FF6B6B",
+                  fontWeight: "700",
+                  textShadow: "2px 2px 5px rgba(255, 100, 100, 0.5)",
+                }}
+              >
+                <i className="bi bi-image-fill me-2"></i>
+                Reconnaissance d’Images |{" "}
+                <span style={{ fontFamily: "'Tajawal', sans-serif !important" }}>
+                  التعرف على الصور
+                </span>
               </h1>
               <h5 className="mb-4 text-muted">
-                Déposer, Télécharger ou Coller l’image | اسحب، قم بالتحميل أو ألصق صورة
+                Déposer, Télécharger ou Coller l’image |{" "}
+                <span style={{ fontFamily: "'Tajawal', sans-serif !important" }}>
+                  اسحب، قم بالتحميل أو ألصق صورة
+                </span>
               </h5>
               <div className="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
                 <button
                   className="btn btn-lg btn-outline-primary btn-custom"
                   onClick={() => handleLanguageSelect("FR")}
-                  style={{ whiteSpace: "normal", wordWrap: "break-word" }}
+                  style={{
+                    whiteSpace: "normal",
+                    wordWrap: "break-word",
+                    width: "200px",
+                    boxSizing: "border-box",
+                    fontSize: "1.3rem",
+                    padding: "12px 25px",
+                    border: "3px solid #0055A4",
+                    borderRadius: "30px",
+                    fontWeight: "bold",
+                  }}
                 >
                   Français
                 </button>
                 <button
                   className="btn btn-lg btn-outline-success btn-custom"
                   onClick={() => handleLanguageSelect("AR")}
-                  style={{ whiteSpace: "normal", wordWrap: "break-word" }}
+                  style={{
+                    whiteSpace: "normal",
+                    wordWrap: "break-word",
+                    width: "200px",
+                    boxSizing: "border-box",
+                    fontSize: "1.3rem",
+                    padding: "12px 25px",
+                    border: "3px solid #007A3D",
+                    borderRadius: "30px",
+                    fontWeight: "bold",
+                    fontFamily: "'Tajawal', sans-serif !important",
+                  }}
                 >
                   العربية
                 </button>
