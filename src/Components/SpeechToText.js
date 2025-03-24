@@ -562,6 +562,133 @@ const SpeechToTextApp = () => {
             padding: 20px;
             margin-top: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+            min-height: 200px; /* Ensure enough space for animations */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+
+          /* Animation Container for Feedback */
+          .feedback-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none; /* Prevent interaction with animation */
+            z-index: 0; /* Ensure animation stays behind text */
+          }
+
+          /* Fireworks for Correct Answers */
+          .fireworks {
+            position: relative;
+            width: 100%;
+            height: 100%;
+          }
+
+          .firework {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #ffd700);
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.8);
+            animation: firework-burst 2s infinite ease-out;
+          }
+
+          .firework:nth-child(odd) {
+            background: linear-gradient(45deg, #00c4ff, #6b48ff);
+          }
+
+          .firework:nth-child(1) {
+            top: 20%;
+            left: 20%;
+            animation-delay: 0s;
+          }
+          .firework:nth-child(2) {
+            top: 30%;
+            left: 70%;
+            animation-delay: 0.3s;
+          }
+          .firework:nth-child(3) {
+            top: 60%;
+            left: 30%;
+            animation-delay: 0.6s;
+          }
+          .firework:nth-child(4) {
+            top: 70%;
+            left: 80%;
+            animation-delay: 0.9s;
+          }
+          .firework:nth-child(5) {
+            top: 50%;
+            left: 50%;
+            animation-delay: 1.2s;
+          }
+          .firework:nth-child(6) {
+            top: 40%;
+            left: 40%;
+            animation-delay: 1.5s;
+          }
+          .firework:nth-child(7) {
+            top: 80%;
+            left: 60%;
+            animation-delay: 1.8s;
+          }
+          .firework:nth-child(8) {
+            top: 25%;
+            left: 55%;
+            animation-delay: 2.1s;
+          }
+
+          @keyframes firework-burst {
+            0% {
+              transform: scale(0);
+              opacity: 1;
+            }
+            50% {
+              transform: scale(1.5);
+              opacity: 0.8;
+            }
+            100% {
+              transform: scale(0);
+              opacity: 0;
+            }
+          }
+
+          /* Sparkle Effect for Fireworks */
+          .firework::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffffff;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: sparkle 2s infinite;
+          }
+
+          @keyframes sparkle {
+            0%, 100% {
+              opacity: 0;
+              transform: scale(0);
+            }
+            50% {
+              opacity: 1;
+              transform: scale(1.5);
+            }
+          }
+
+          /* Ensure text stays above animations */
+          .feedback-container > div {
+            position: relative;
+            z-index: 1;
           }
 
           /* Buttons */
@@ -612,6 +739,115 @@ const SpeechToTextApp = () => {
             width: 100%;
           }
 
+          /* Centered Particle Loading Animation Below Buttons */
+          .loading-particle-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px; /* Increased space to add more breathing room */
+            width: 100%; /* Ensure the wrapper takes full width for centering */
+          }
+
+          /* Particle Loading Animation */
+          .loading-particles {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          /* Orbit Path (Faint Circle) */
+          .loading-particles::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 1px dashed rgba(107, 72, 255, 0.2); /* Faint dashed circle */
+            border-radius: 50%;
+          }
+
+          .loading-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(45deg, #007bff, #6b48ff); /* Gradient from blue to purple */
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(107, 72, 255, 0.6); /* Enhanced glow effect */
+            animation: particle-orbit 2.5s linear infinite, pulse-particle 1s ease-in-out infinite;
+          }
+
+          .loading-particle:nth-child(1) {
+            animation-delay: 0s, 0s;
+          }
+
+          .loading-particle:nth-child(2) {
+            animation-delay: 0.3s, 0.2s;
+          }
+
+          .loading-particle:nth-child(3) {
+            animation-delay: 0.6s, 0.4s;
+          }
+
+          .loading-particle:nth-child(4) {
+            animation-delay: 0.9s, 0.6s;
+          }
+
+          .loading-particle:nth-child(5) {
+            animation-delay: 1.2s, 0.8s;
+          }
+
+          .loading-particle:nth-child(6) {
+            animation-delay: 1.5s, 1s;
+          }
+
+          @keyframes particle-orbit {
+            0% {
+              transform: rotate(0deg) translateX(25px) scale(1);
+              opacity: 0.4;
+            }
+            50% {
+              transform: rotate(180deg) translateX(25px) scale(1.3);
+              opacity: 1;
+            }
+            100% {
+              transform: rotate(360deg) translateX(25px) scale(1);
+              opacity: 0.4;
+            }
+          }
+
+          @keyframes pulse-particle {
+            0%, 100% {
+              box-shadow: 0 0 10px rgba(107, 72, 255, 0.6);
+            }
+            50% {
+              box-shadow: 0 0 15px rgba(107, 72, 255, 0.9);
+            }
+          }
+
+          /* Loading Text with Gradient, Shadow, and Bounce Animation */
+          .loading-text {
+            font-size: 1rem;
+            font-weight: 500;
+            background: linear-gradient(45deg, #007bff, #6b48ff); /* Gradient text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+            margin-top: 12px; /* Slightly adjusted spacing */
+            animation: bounce-text 1.5s ease-in-out infinite;
+          }
+
+          @keyframes bounce-text {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-5px);
+            }
+          }
+
           /* Animation for Background */
           @keyframes floating {
             0% { transform: translateY(0px); }
@@ -629,6 +865,7 @@ const SpeechToTextApp = () => {
             }
             .feedback-container {
               padding: 15px;
+              min-height: 150px;
             }
             .audio-player {
               max-width: 300px;
@@ -637,6 +874,14 @@ const SpeechToTextApp = () => {
             .audio-player span {
               font-size: 0.9rem;
               padding: 2px 6px;
+            }
+            .firework {
+              width: 6px;
+              height: 6px;
+            }
+            .firework::before {
+              width: 3px;
+              height: 3px;
             }
           }
 
@@ -661,6 +906,43 @@ const SpeechToTextApp = () => {
             }
             .audio-player input[type="range"] {
               margin: 0 10px;
+            }
+            .loading-particles {
+              width: 40px;
+              height: 40px;
+            }
+            .loading-particles::before {
+              width: 40px;
+              height: 40px;
+            }
+            .loading-particle {
+              width: 6px;
+              height: 6px;
+            }
+            @keyframes particle-orbit {
+              0% {
+                transform: rotate(0deg) translateX(20px) scale(1);
+                opacity: 0.4;
+              }
+              50% {
+                transform: rotate(180deg) translateX(20px) scale(1.3);
+                opacity: 1;
+              }
+              100% {
+                transform: rotate(360deg) translateX(20px) scale(1);
+                opacity: 0.4;
+              }
+            }
+            .loading-text {
+              font-size: 0.9rem;
+            }
+            .firework {
+              width: 5px;
+              height: 5px;
+            }
+            .firework::before {
+              width: 2px;
+              height: 2px;
             }
           }
         `}
@@ -764,6 +1046,22 @@ const SpeechToTextApp = () => {
                           <i className="bi bi-mic"></i>
                         </button>
                       </div>
+                      {/* Centered Particle Loading Animation Below Buttons */}
+                      {isLoading && (
+                        <div className="loading-particle-wrapper">
+                          <div className="loading-particles">
+                            <div className="loading-particle"></div>
+                            <div className="loading-particle"></div>
+                            <div className="loading-particle"></div>
+                            <div className="loading-particle"></div>
+                            <div className="loading-particle"></div>
+                            <div className="loading-particle"></div>
+                          </div>
+                          <span className="loading-text">
+                            {language === "french" ? "Traitement en cours..." : "جارٍ المعالجة..."}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   )}
                   {isRecording && (
@@ -778,28 +1076,45 @@ const SpeechToTextApp = () => {
               {/* Feedback Section */}
               {transcribedText && (
                 <div className="feedback-container">
-                  <h5 className="fw-bold">
-                    {language === "french" ? "Texte transcrit :" : "النص المستخرج :"}
-                  </h5>
-                  <p
-                    style={{
-                      fontSize: language === "arabic" ? "1.6rem" : "1.4rem",
-                      color: "#555",
-                    }}
-                  >
-                    {transcribedText}
-                  </p>
-                  <h5 className="fw-bold mt-3">
-                    {language === "french" ? "Résultat :" : "النتيجة :"}
-                  </h5>
-                  <p
-                    style={{
-                      fontSize: "1.2rem",
-                      color: feedback.includes("Correct") || feedback.includes("صحيح") ? "#28a745" : "#dc3545",
-                    }}
-                  >
-                    {feedback}
-                  </p>
+                  <div>
+                    <h5 className="fw-bold">
+                      {language === "french" ? "Texte transcrit :" : "النص المستخرج :"}
+                    </h5>
+                    <p
+                      style={{
+                        fontSize: language === "arabic" ? "1.6rem" : "1.4rem",
+                        color: "#555",
+                      }}
+                    >
+                      {transcribedText}
+                    </p>
+                    <h5 className="fw-bold mt-3">
+                      {language === "french" ? "Résultat :" : "النتيجة :"}
+                    </h5>
+                    <p
+                      style={{
+                        fontSize: "1.2rem",
+                        color:
+                          feedback.includes("Correct") || feedback.includes("صحيح")
+                            ? "#28a745"
+                            : "#dc3545",
+                      }}
+                    >
+                      {feedback}
+                    </p>
+                  </div>
+
+                  {/* Animation for Feedback (Only for Correct Answers) */}
+                  {(feedback.includes("Correct") || feedback.includes("صحيح")) && (
+                    <div className="feedback-animation">
+                      <div className="fireworks">
+                        {/* Firework Particles */}
+                        {[...Array(8)].map((_, i) => (
+                          <div key={`firework-${i}`} className="firework" />
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 

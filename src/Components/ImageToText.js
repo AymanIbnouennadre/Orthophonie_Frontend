@@ -21,6 +21,7 @@ const Fonctionnalites = () => {
   const [imageCaptured, setImageCaptured] = useState(null);
   const [audioSrc, setAudioSrc] = useState(null);
   const [isAudioLoading, setIsAudioLoading] = useState(false);
+  const [isConverting, setIsConverting] = useState(false);
   const [isConverted, setIsConverted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentWordIndex, setCurrentWordIndex] = useState(-1);
@@ -33,6 +34,21 @@ const Fonctionnalites = () => {
 
   const videoConstraints = {
     facingMode: isMobileDevice() ? { exact: "environment" } : "user",
+  };
+
+  // Fonction utilitaire pour nettoyer l'audio
+  const cleanupAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current.src = "";
+    }
+    if (audioSrc) {
+      URL.revokeObjectURL(audioSrc);
+      setAudioSrc(null);
+    }
+    setIsPlaying(false);
+    setCurrentWordIndex(-1);
   };
 
   const handleFileChange = (event) => {
@@ -50,19 +66,18 @@ const Fonctionnalites = () => {
   };
 
   const handleBackToLanguageChoice = () => {
+    cleanupAudio();
     setLanguage(null);
     setSelectedFile(null);
     setExtractedText("");
     setImageCaptured(null);
-    setAudioSrc(null);
     setIsConverted(false);
-    setCurrentWordIndex(-1);
-    setIsPlaying(false);
     window.history.pushState({}, "", "/fonctionnalités/image-to-text");
   };
 
   const handleStartClick = async () => {
     if (selectedFile) {
+      setIsConverting(true);
       const formData = new FormData();
       formData.append("file", selectedFile);
 
@@ -87,6 +102,8 @@ const Fonctionnalites = () => {
         console.error("Erreur de requête :", error);
         setExtractedText("Une erreur est survenue.");
         setIsConverted(true);
+      } finally {
+        setIsConverting(false);
       }
     } else {
       setExtractedText("Veuillez sélectionner un fichier.");
@@ -179,7 +196,7 @@ const Fonctionnalites = () => {
       audio.removeEventListener("play", handlePlay);
       audio.removeEventListener("pause", handlePause);
       audio.removeEventListener("ended", handleEnded);
-      if (audioSrc) URL.revokeObjectURL(audioSrc);
+      cleanupAudio();
     };
   }, [audioSrc, extractedText]);
 
@@ -245,13 +262,11 @@ const Fonctionnalites = () => {
   };
 
   const handleClear = () => {
+    cleanupAudio();
     setSelectedFile(null);
     setImageCaptured(null);
     setExtractedText("");
-    setAudioSrc(null);
     setIsConverted(false);
-    setCurrentWordIndex(-1);
-    setIsPlaying(false);
   };
 
   const renderHighlightedText = () => {
@@ -277,43 +292,70 @@ const Fonctionnalites = () => {
     <div>
       <style>
         {`
-          /* Apply Poppins font to French text and Tajawal to Arabic text after language selection */
+          /* Styles existants inchangés */
           .image-to-text-content {
-            font-family: 'Poppins', sans-serif; /* Default to Poppins for French */
+            font-family: 'Poppins', sans-serif;
           }
-
           .image-to-text-content.arabic {
-            font-family: 'Tajawal', sans-serif; /* Tajawal for Arabic */
+            font-family: 'Tajawal', sans-serif;
             direction: rtl;
           }
-
-          /* Specific styles for buttons and text */
-          .image-to-text-content .btn {
-            font-family: inherit; /* Inherit the font from the parent */
-          }
-
-          .image-to-text-content h4, 
-          .image-to-text-content h5, 
+          .image-to-text-content .btn,
+          .image-to-text-content h4,
+          .image-to-text-content h5,
           .image-to-text-content p {
-            font-family: inherit; /* Inherit the font from the parent */
+            font-family: inherit;
           }
-
-          /* Modal styles */
           .modal-content {
-            font-family: 'Poppins', sans-serif; /* Default to Poppins for French */
+            font-family: 'Poppins', sans-serif;
           }
-
           .modal-content.arabic {
-            font-family: 'Tajawal', sans-serif; /* Tajawal for Arabic */
+            font-family: 'Tajawal', sans-serif;
             direction: rtl;
           }
-
-          .modal-content h2, 
+          .modal-content h2,
           .modal-content button {
-            font-family: inherit; /* Inherit the font from the parent */
+            font-family: inherit;
           }
 
-          /* Media queries remain unchanged */
+          /* Nouveau style pour le chargement avec des points pulsants */
+          .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+          }
+          .loading-dots {
+            display: flex;
+            gap: 8px;
+          }
+          .dot {
+            width: 12px;
+            height: 12px;
+            background-color: #424242; /* Gris anthracite */
+            border-radius: 50%;
+            animation: pulse 1.2s ease-in-out infinite;
+          }
+          .dot:nth-child(1) {
+            animation-delay: 0s;
+          }
+          .dot:nth-child(2) {
+            animation-delay: 0.2s;
+          }
+          .dot:nth-child(3) {
+            animation-delay: 0.4s;
+          }
+          @keyframes pulse {
+            0%, 100% {
+              transform: scale(1);
+              background-color: #424242;
+            }
+            50% {
+              transform: scale(1.5);
+              background-color: #1976d2; /* Bleu profond */
+            }
+          }
+
           @media (max-width: 768px) {
             .text-muted {
               font-size: 1.2rem !important;
@@ -322,13 +364,12 @@ const Fonctionnalites = () => {
               padding: 1rem !important;
             }
             .text-extracted-container p {
-              font-size: ${language === "AR" ? "1.6rem" : "1.4rem"} !important; /* Augmenté pour l'arabe */
+              font-size: ${language === "AR" ? "1.6rem" : "1.4rem"} !important;
             }
             .text-extracted-container {
               max-height: 70vh !important;
             }
           }
-
           @media (max-width: 576px) {
             .text-muted {
               font-size: 1.1rem !important;
@@ -337,7 +378,7 @@ const Fonctionnalites = () => {
               padding: 0.5rem !important;
             }
             .text-extracted-container p {
-              font-size: ${language === "AR" ? "1.5rem" : "1.3rem"} !important; /* Augmenté pour l'arabe */
+              font-size: ${language === "AR" ? "1.5rem" : "1.3rem"} !important;
             }
             .text-extracted-container {
               max-height: 65vh !important;
@@ -377,7 +418,7 @@ const Fonctionnalites = () => {
                     </>
                   ) : (
                     <>
-                      <i className="bi bi-arrow-left"></i> العودة لاختيار اللغة
+                       العودة لاختيار اللغة   <i className="bi bi-arrow-left"></i>
                     </>
                   )}
                 </button>
@@ -412,6 +453,15 @@ const Fonctionnalites = () => {
                       >
                         {isAudioLoading ? <i className="bi bi-hourglass-split"></i> : <i className="bi bi-volume-up"></i>}
                       </button>
+                    )}
+                    {isAudioLoading && (
+                      <div className="loading-container">
+                        <div className="loading-dots">
+                          <div className="dot"></div>
+                          <div className="dot"></div>
+                          <div className="dot"></div>
+                        </div>
+                      </div>
                     )}
                     {audioSrc && (
                       <>
@@ -536,9 +586,14 @@ const Fonctionnalites = () => {
                     <button
                       className="btn btn-primary"
                       onClick={handleStartClick}
+                      disabled={isConverting}
                       style={{ fontSize: "1rem", padding: "8px 20px" }}
                     >
-                      {language === "FR" ? "Convertir" : "تحويل"}
+                      {isConverting ? (
+                        <i className="bi bi-hourglass-split"></i>
+                      ) : (
+                        language === "FR" ? "Convertir" : "تحويل"
+                      )}
                     </button>
                     <button
                       className="btn btn-warning"
@@ -552,6 +607,15 @@ const Fonctionnalites = () => {
                       {language === "FR" ? "Annuler" : "إلغاء"}
                     </button>
                   </div>
+                  {isConverting && (
+                    <div className="loading-container">
+                      <div className="loading-dots">
+                        <div className="dot"></div>
+                        <div className="dot"></div>
+                        <div className="dot"></div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
