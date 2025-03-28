@@ -166,10 +166,11 @@ const Footer = () => {
               <a className="border-bottom" href="https://aymanibnouennadre.github.io/Portfolio/" target="_blank">
                 Ayman Ibnouennadre
               </a>{" "}
+              {/* obligatoire après deploiement (copyright) 
               | Conçu par{" "}
               <a className="border-bottom" href="https://htmlcodex.com" target="_blank">
                 HTML Codex
-              </a>
+              </a>*/}
             </div>
           </div>
         </div>

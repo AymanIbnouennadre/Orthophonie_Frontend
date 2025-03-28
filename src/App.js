@@ -8,6 +8,7 @@ import Spinner from './Components/Spinner';
 import About from './Components/About';
 import ImageToText from './Components/ImageToText';
 import SpeechToText from './Components/SpeechToText';
+import Quiz from './Components/Quiz';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/À_propos" element={<About />} />
             <Route path="/fonctionnalités/image-to-text" element={<ImageToText />} />
             <Route path="/fonctionnalités/speech-to-text" element={<SpeechToText />} />
+            <Route path="/fonctionnalités/quiz" element={<Quiz />} />
           </Routes>
           <Footer />
         </Spinner>
